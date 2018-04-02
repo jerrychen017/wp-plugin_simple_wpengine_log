@@ -1,5 +1,3 @@
 This is a file that helps to learn github
 
-
-Some changes
-
+Changes made at 3:21pm Apr 2
