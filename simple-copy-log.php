@@ -22,13 +22,32 @@ You should have received a copy of the GNU General Public License
 with this program. If not, visit: https://www.gnu.org/licenses/
 */
 
-// a function that calls activation actions
-function myplugin_on_activation() {
+// exit if file is called directly
+if ( ! defined( 'ABSPATH' ) ) {
 
-    if ( ! current_user_can( 'activate_plugins' ) ) return;
-
-    add_option( 'myplugin_posts_per_page', 10 );
-    add_option( 'myplugin_show_welcome_page', true );
+	exit;
 
 }
-register_activation_hook( __FILE__, 'myplugin_on_activation' );
+
+
+// if admin area
+if ( is_admin() ) {
+
+	// include dependencies
+	require_once plugin_dir_path( __FILE__ ) . 'admin/admin-menu.php';
+	require_once plugin_dir_path( __FILE__ ) . 'admin/settings-page.php';
+  require_once plugin_dir_path( __FILE__ ) . 'admin/settings-register.php';
+  require_once plugin_dir_path( __FILE__ ) . 'admin/settings-callbacks.php';
+
+}
+
+// default plugin options
+function SCL_options_default() {
+
+	return array(
+		'aws_reigon'     => 'NULL',
+		'aws_access_id'   => 'NULL',
+		'aws_access_key'   => 'NULL',
+	);
+
+}
