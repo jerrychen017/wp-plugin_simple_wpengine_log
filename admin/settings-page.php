@@ -1,4 +1,4 @@
-<?php // SCL - Settings
+<?php // Simple WPEngine Log - Settings
 
 // exit if file is called directly
 if ( ! defined( 'ABSPATH' ) ) {
@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // display the plugin settings page
-function SCL_display_settings_page() {
+function swl_display_settings_page() {
 
 	// check if user is allowed access
 	if ( ! current_user_can( 'manage_options' ) ) return;
@@ -22,10 +22,10 @@ function SCL_display_settings_page() {
 			<?php
 
 			// output security fields
-			settings_fields( 'SCL_options' );
+			settings_fields( 'swl_options' );
 
 			// output setting sections
-			do_settings_sections( 'simple_copy_log' );
+			do_settings_sections( 'simple_wpengine_log' );
 
 			// submit button
 			submit_button();

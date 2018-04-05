@@ -1,4 +1,4 @@
-<?php // SCL - Register Settings
+<?php // Simple WPEngine Log - Register Settings
 
 // exit if file is called directly
 if ( ! defined( 'ABSPATH' ) ) {
@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // register plugin settings
-function SCL_register_settings() {
+function swl_register_settings() {
 
 	/*
 
@@ -21,9 +21,9 @@ function SCL_register_settings() {
 	*/
 
 	register_setting(
-		'SCL_options',
-		'SCL_options',
-		'SCL_callback_validate_options'
+		'swl_options',
+		'swl_options',
+		'swl_callback_validate_options'
 	);
 
   /*
@@ -38,10 +38,10 @@ function SCL_register_settings() {
 	*/
 
 	add_settings_section(
-		'SCL_section_bucket',
+		'swl_section_bucket',
 		'Set AWS Bucket',
-		'SCL_callback_section_bucket',
-		'simple_copy_log'
+		'swl_callback_section_bucket',
+		'simple_wpengine_log'
 	);
 
   /*
@@ -60,29 +60,38 @@ add_settings_field(
 add_settings_field(
   'aws_reigon',
   'Reigon',
-  'SCL_callback_field_text',
-  'simple_copy_log',
-  'SCL_section_bucket',
-  [ 'id' => 'aws_reigon', 'label' => 'Your AWS Access Key' ]
+  'swl_callback_field_text',
+  'simple_wpengine_log',
+  'swl_section_bucket',
+  [ 'id' => 'aws_reigon', 'label' => 'Your AWS Reigon' ]
 );
 
 add_settings_field(
   'aws_access_id',
   'AWS Access ID',
-  'SCL_callback_field_text',
-  'simple_copy_log',
-  'SCL_section_bucket',
+  'swl_callback_field_text',
+  'simple_wpengine_log',
+  'swl_section_bucket',
   [ 'id' => 'aws_access_id', 'label' => 'Your AWS Access ID' ]
 );
 
 add_settings_field(
   'aws_access_key',
   'AWS Access Key',
-  'SCL_callback_field_text',
-  'simple_copy_log',
-  'SCL_section_bucket',
+  'swl_callback_field_text',
+  'simple_wpengine_log',
+  'swl_section_bucket',
   [ 'id' => 'aws_access_key', 'label' => 'Your AWS Access Key' ]
 );
 
+add_settings_field(
+  'aws_bucket_name',
+  'AWS Bucket Name',
+  'swl_callback_field_text',
+  'simple_wpengine_log',
+  'swl_section_bucket',
+  [ 'id' => 'aws_bucket_name', 'label' => 'Your Desinated AWS Bucket Name' ]
+);
+
 }
-add_action( 'admin_init', 'SCL_register_settings' );
+add_action( 'admin_init', 'swl_register_settings' );
