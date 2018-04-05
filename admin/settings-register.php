@@ -68,7 +68,7 @@ add_settings_field(
 
 add_settings_field(
   'aws_access_id',
-  'AWS Access ID',
+  'AWS Access Key ID',
   'swl_callback_field_text',
   'simple_wpengine_log',
   'swl_section_bucket',
@@ -77,7 +77,7 @@ add_settings_field(
 
 add_settings_field(
   'aws_access_key',
-  'AWS Access Key',
+  'AWS Secret Access Key',
   'swl_callback_field_text',
   'simple_wpengine_log',
   'swl_section_bucket',
