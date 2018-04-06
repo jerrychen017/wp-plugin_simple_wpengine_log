@@ -22,12 +22,7 @@ You should have received a copy of the GNU General Public License
 with this program. If not, visit: https://www.gnu.org/licenses/
 */
 
-// exit if file is called directly
-if ( ! defined( 'ABSPATH' ) ) {
-
-	exit;
-
-}
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 
 // if admin area
@@ -49,10 +44,10 @@ require_once plugin_dir_path( __FILE__ ) . 'includes/core-functions.php';
 function swl_options_default() {
 
 	return array(
-		'aws_reigon'     => 'NULL',
-		'aws_access_id'   => 'NULL',
-		'aws_access_key'   => 'NULL',
-    'aws_bucket_name'  => 'NULL',
+		'aws_reigon'     => '',
+		'aws_access_id'   => '',
+		'aws_access_key'   => '',
+    'aws_bucket_name'  => '',
 	);
 
 }

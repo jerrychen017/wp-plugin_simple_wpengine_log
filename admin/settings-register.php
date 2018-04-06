@@ -1,41 +1,15 @@
 <?php // Simple WPEngine Log - Register Settings
 
-// exit if file is called directly
-if ( ! defined( 'ABSPATH' ) ) {
-
-	exit;
-
-}
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 // register plugin settings
 function swl_register_settings() {
-
-	/*
-
-	register_setting(
-		string   $option_group,
-		string   $option_name,
-		callable $sanitize_callback
-	);
-
-	*/
 
 	register_setting(
 		'swl_options',
 		'swl_options',
 		'swl_callback_validate_options'
 	);
-
-  /*
-
-	add_settings_section(
-		string   $id,
-		string   $title,
-		callable $callback,
-		string   $page
-	);
-
-	*/
 
 	add_settings_section(
 		'swl_section_bucket',
@@ -44,27 +18,14 @@ function swl_register_settings() {
 		'simple_wpengine_log'
 	);
 
-  /*
-
 add_settings_field(
-    string   $id,
-  string   $title,
-  callable $callback,
-  string   $page,
-  string   $section = 'default',
-  array    $args = []
-);
-
-*/
-
-add_settings_field(
-  'aws_reigon',
-  'Reigon',
-  'swl_callback_field_text',
-  'simple_wpengine_log',
-  'swl_section_bucket',
-  [ 'id' => 'aws_reigon', 'label' => 'Your AWS Reigon' ]
-);
+		'aws_reigon',
+		'Reigon',
+		'swl_callback_field_select',
+		'simple_wpengine_log',
+		'swl_section_bucket',
+		[ 'id' => 'aws_reigon', 'label' => 'Your AWS Reigon' ]
+	);
 
 add_settings_field(
   'aws_access_id',
@@ -72,7 +33,7 @@ add_settings_field(
   'swl_callback_field_text',
   'simple_wpengine_log',
   'swl_section_bucket',
-  [ 'id' => 'aws_access_id', 'label' => 'Your AWS Access ID' ]
+  [ 'id' => 'aws_access_id', 'label' => 'Your AWS Access Key ID' ]
 );
 
 add_settings_field(
@@ -81,7 +42,7 @@ add_settings_field(
   'swl_callback_field_text',
   'simple_wpengine_log',
   'swl_section_bucket',
-  [ 'id' => 'aws_access_key', 'label' => 'Your AWS Access Key' ]
+  [ 'id' => 'aws_access_key', 'label' => 'Your AWS Secret Access Key' ]
 );
 
 add_settings_field(

@@ -1,11 +1,6 @@
 <?php // Simple WPEngine Log - Validate Settings
 
-// exit if file is called directly
-if ( ! defined( 'ABSPATH' ) ) {
-
-	exit;
-
-}
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 // callback: validate options
 function swl_callback_validate_options( $input ) {

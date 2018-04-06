@@ -1,11 +1,6 @@
 <?php // Simple WPEngine Log - Settings
 
-// exit if file is called directly
-if ( ! defined( 'ABSPATH' ) ) {
-
-	exit;
-
-}
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 // display the plugin settings page
 function swl_display_settings_page() {
@@ -27,8 +22,11 @@ function swl_display_settings_page() {
 			// output setting sections
 			do_settings_sections( 'simple_wpengine_log' );
 
-			// submit button
+			// save changes button
 			submit_button();
+
+			// Copy button
+			submit_button('Copy');
 
 			?>
 
