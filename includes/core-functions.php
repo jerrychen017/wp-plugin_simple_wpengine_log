@@ -41,4 +41,6 @@ function swl_copy_log() {
  }
 }
 
-add_action('add_option_(swl_options) ', 'swl_copy_log');
+if ( ! wp_next_scheduled( ‘swl_copy_log’ ) ) {
+            wp_schedule_event( time(), ‘hourly’, ‘swl_copy_log’ );
+}
