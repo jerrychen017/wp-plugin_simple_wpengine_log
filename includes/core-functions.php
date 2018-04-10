@@ -14,11 +14,12 @@ function swl_copy_log() {
   if ( isset( $options['aws_reigon'] ) && ! empty( $options['aws_reigon'] )
 && isset( $options['aws_access_id'] ) && ! empty( $options['aws_access_id'] )
 && isset( $options['aws_access_key'] ) && ! empty( $options['aws_access_key'] )
-&& isset( $options['aws_bucket_name'] ) && ! empty( $options['aws_bucket_name'] )) {
+&& isset( $options['aws_bucket_name'] ) && ! empty( $options['aws_bucket_name'] )
+&& isset( $options['wpengine_log_reference_id'] ) && ! empty( $options['wpengine_log_reference_id'] )) {
 
   $bucket = $options['aws_bucket_name'];
-  $file_Path = '/';
-  $key = basename('test1.log');
+  $file_Path = '/' . $options['wpengine_log_reference_id'] . '/logs/';
+  $key = basename('current.log');
   try{
       //Create a S3Client
       $s3Client = new S3Client([
@@ -32,7 +33,7 @@ function swl_copy_log() {
 
       $result = $s3Client->putObject([
           'Bucket'     => $bucket,
-          'Key'        => $key,
+          'Key'        => $·key,
           'SourceFile' => $file_Path,
       ]);
   } catch (S3Exception $e) {

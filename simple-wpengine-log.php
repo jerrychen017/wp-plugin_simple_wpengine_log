@@ -24,7 +24,6 @@ with this program. If not, visit: https://www.gnu.org/licenses/
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-
 // if admin area
 if ( is_admin() ) {
 
@@ -48,6 +47,7 @@ function swl_options_default() {
 		'aws_access_id'   => '',
 		'aws_access_key'   => '',
     'aws_bucket_name'  => '',
+		'wpengine_log_reference_id' => '',
 	);
 
 }

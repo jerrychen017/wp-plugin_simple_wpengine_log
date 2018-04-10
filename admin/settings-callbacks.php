@@ -26,6 +26,7 @@ function swl_callback_field_text( $args ) {
 }
 
 // select field options
+// TODO: use aws function call instead
 function swl_options_select() {
 
 	return array(

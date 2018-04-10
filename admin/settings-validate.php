@@ -33,6 +33,13 @@ function swl_callback_validate_options( $input ) {
 
 	}
 
+	// wpengine log referece id
+	if ( isset( $input['wpengine_log_reference_id'] ) ) {
+
+		$input['wpengine_log_reference_id'] = sanitize_text_field( $input['wpengine_log_reference_id'] );
+
+	}
+
 	return $input;
 
 }
