@@ -12,6 +12,13 @@ function swl_callback_validate_options( $input ) {
 
 	}
 
+	// aws endpoint
+	if ( isset( $input['aws_endpoint'] ) ) {
+
+		$input['aws_endpoint'] = sanitize_text_field( $input['aws_endpoint'] );
+
+	}
+
 	// aws access id
 	if ( isset( $input['aws_access_id'] ) ) {
 
@@ -33,11 +40,17 @@ function swl_callback_validate_options( $input ) {
 
 	}
 
-	// wpengine log referece id
-	if ( isset( $input['wpengine_log_reference_id'] ) ) {
+	// WPEngine current access log location
+	if ( isset( $input['wpe_access_loc'] ) ) {
 
-		$input['wpengine_log_reference_id'] = sanitize_text_field( $input['wpengine_log_reference_id'] );
+		$input['wpe_access_loc'] = sanitize_text_field( $input['wpe_access_loc'] );
 
+	}
+
+	// WPEngine current error log location
+	if ( isset( $input['wpe_error_loc'] ) ) {
+
+		$input['wpe_error_loc'] = sanitize_text_field( $input['wpe_error_loc'] );
 	}
 
 	return $input;

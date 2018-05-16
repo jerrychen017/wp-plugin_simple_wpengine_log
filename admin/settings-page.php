@@ -25,9 +25,6 @@ function swl_display_settings_page() {
 			// save changes button
 			submit_button();
 
-			// Copy button
-			submit_button('Copy');
-
 			?>
 
 		</form>

@@ -44,10 +44,14 @@ function swl_options_default() {
 
 	return array(
 		'aws_reigon'     => '',
+		'aws_endpoint'     => '',
 		'aws_access_id'   => '',
 		'aws_access_key'   => '',
     'aws_bucket_name'  => '',
-		'wpengine_log_reference_id' => '',
+		// location of WPEngine current access log
+		'wpe_access_loc' => '',
+		// location of WPEngine current error log
+		'wpe_error_loc' => '',
 	);
 
 }

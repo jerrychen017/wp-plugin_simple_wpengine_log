@@ -67,6 +67,15 @@ add_settings_field(
 );
 
 add_settings_field(
+  'aws_endpoint',
+  'AWS Endpoint',
+  'swl_callback_field_text',
+  'simple_wpengine_log',
+  'swl_section_bucket',
+  [ 'id' => 'aws_endpoint', 'label' => 'Your AWS Endpoint' ]
+);
+
+add_settings_field(
   'aws_access_id',
   'AWS Access ID',
   'swl_callback_field_text',
@@ -94,12 +103,21 @@ add_settings_field(
 );
 
 add_settings_field(
-  'wpengine_log_reference_id',
-  'WPEngine Log Reference ID',
+  'wpe_access_loc',
+  'WPEngine Current Access Log Location',
   'swl_callback_field_text',
   'simple_wpengine_log',
   'swl_section_bucket',
-  [ 'id' => 'wpengine_log_reference_id', 'label' => 'Your WPEngine Log Reference ID' ]
+  [ 'id' => 'wpe_access_loc', 'label' => 'Your WPEngine Current Access Log Location' ]
+);
+
+add_settings_field(
+  'wpe_error_loc',
+  'WPEngine Current Error Log Location',
+  'swl_callback_field_text',
+  'simple_wpengine_log',
+  'swl_section_bucket',
+  [ 'id' => 'wpe_error_loc', 'label' => 'Your WPEngine Current Error Log Location' ]
 );
 
 }
