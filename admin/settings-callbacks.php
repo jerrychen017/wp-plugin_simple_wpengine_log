@@ -1,11 +1,6 @@
 <?php // Simple WPEngine Log - Settings Callbacks
 
-// exit if file is called directly
-if ( ! defined( 'ABSPATH' ) ) {
-
-	exit;
-
-}
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 // callback: bucket section
 function swl_callback_section_bucket() {

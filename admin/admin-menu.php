@@ -1,11 +1,6 @@
 <?php // Simple WPEngine - Admin Menu
 
-// exit if file is called directly
-if ( ! defined( 'ABSPATH' ) ) {
-
-	exit;
-
-}
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 // add sub-level administrative menu
 function swl_add_sublevel_menu() {

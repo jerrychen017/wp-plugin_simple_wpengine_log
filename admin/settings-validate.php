@@ -1,11 +1,6 @@
 <?php // Simple WPEngine Log - Validate Settings
 
-// exit if file is called directly
-if ( ! defined( 'ABSPATH' ) ) {
-
-	exit;
-
-}
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 // callback: validate options
 function swl_callback_validate_options( $input ) {
@@ -14,6 +9,13 @@ function swl_callback_validate_options( $input ) {
 	if ( isset( $input['aws_reigon'] ) ) {
 
 		$input['aws_reigon'] = sanitize_text_field( $input['aws_reigon'] );
+
+	}
+
+	// aws endpoint
+	if ( isset( $input['aws_endpoint'] ) ) {
+
+		$input['aws_endpoint'] = sanitize_text_field( $input['aws_endpoint'] );
 
 	}
 
@@ -36,6 +38,19 @@ function swl_callback_validate_options( $input ) {
 
 		$input['aws_bucket_name'] = sanitize_text_field( $input['aws_bucket_name'] );
 
+	}
+
+	// WPEngine current access log location
+	if ( isset( $input['wpe_access_loc'] ) ) {
+
+		$input['wpe_access_loc'] = sanitize_text_field( $input['wpe_access_loc'] );
+
+	}
+
+	// WPEngine current error log location
+	if ( isset( $input['wpe_error_loc'] ) ) {
+
+		$input['wpe_error_loc'] = sanitize_text_field( $input['wpe_error_loc'] );
 	}
 
 	return $input;
