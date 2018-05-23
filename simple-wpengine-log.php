@@ -4,6 +4,7 @@ Plugin Name: Simple WPEngine Log
 Description: A plugin that copies over access and error log files to a designated AWS bucket on a weekly basis.
 Plugin URI:  https://plugin-planet.com/
 Author:      Guangrui Chen - Jerry
+Author URI:  http://guangruichen.com
 Version:     1.0
 License:     GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
@@ -43,15 +44,26 @@ require_once plugin_dir_path( __FILE__ ) . 'includes/core-functions.php';
 function swl_options_default() {
 
 	return array(
-		'aws_reigon'     => '',
-		'aws_endpoint'     => '',
+		// aws reigon
+		'aws_reigon'     => 'us-east-1',
+		// correspoinding aws endpoint. Please visit https://docs.aws.amazon.com/general/latest/gr/rande.html for reference.
+		'aws_endpoint'     => 's3.amazonaws.com',
+		// aws secrete access key id
 		'aws_access_id'   => '',
+		// aws secrete access key
 		'aws_access_key'   => '',
+		// name of your designated aws bucket
     'aws_bucket_name'  => '',
 		// location of WPEngine current access log
 		'wpe_access_loc' => '',
 		// location of WPEngine current error log
 		'wpe_error_loc' => '',
+
+		// email that will be sent notifications to
+		'swl_email' => get_option('admin_email'),
+		// display scheduling status
+		'swl_status' => 'No schedule yet',
+
 	);
 
 }
