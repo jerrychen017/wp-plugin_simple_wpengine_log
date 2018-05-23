@@ -2,18 +2,53 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
+
+
+// schedule a cron job swl_copy_cron is it was not scheduled
+if ( ! wp_next_scheduled( 'swl_copy_cron' ) ) {
+  wp_schedule_event( time(), 'daily', 'swl_copy_cron' );
+  // pause for 60 seconds to avoid repetitive scheduling
+  sleep(60);
+}
+
+add_action('swl_copy_cron','copy_log');
+
+register_deactivation_hook( __FILE__, 'swl_deactivate' );
+function swl_deactivate() {
+  wp_clear_scheduled_hook('swl_copy_cron');
+}
+
+// determines if all option fields have been setup
+function is_set_all_fields() {
+  // reigon is set and not empty
+  return isset( $options['aws_reigon'] )
+  && ! empty( $options['aws_reigon'] )
+  // aws endpoint is set and not empty
+  && isset( $options['aws_endpoint'] )
+  && ! empty( $options['aws_endpoint'] )
+  // aws access id is set and not empty
+&& isset( $options['aws_access_id'] )
+&& ! empty( $options['aws_access_id'] )
+// aws secrete key is set and not empty
+&& isset( $options['aws_access_key'] )
+&& ! empty( $options['aws_access_key'] )
+// aws bucket name is set and not empty
+&& isset( $options['aws_bucket_name'] )
+&& ! empty( $options['aws_bucket_name'] )
+// wpe access log location is set and not empty
+&& isset( $options['wpe_access_loc'] )
+&& ! empty( $options['wpe_access_loc'] )
+// wpe error log location is set and not empty
+&& isset( $options['wpe_error_loc'] )
+&& ! empty( $options['wpe_error_loc'] );
+}
+
 // copy access log files to desinated aws bucket
 function swl_copy_access_log() {
 
   $options = get_option( 'swl_options', swl_options_default() );
 
-  if ( isset( $options['aws_reigon'] ) && ! empty( $options['aws_reigon'] )
-  && isset( $options['aws_endpoint'] ) && ! empty( $options['aws_endpoint'] )
-&& isset( $options['aws_access_id'] ) && ! empty( $options['aws_access_id'] )
-&& isset( $options['aws_access_key'] ) && ! empty( $options['aws_access_key'] )
-&& isset( $options['aws_bucket_name'] ) && ! empty( $options['aws_bucket_name'] )
-&& isset( $options['wpe_access_loc'] ) && ! empty( $options['wpe_access_loc'] )
-&& isset( $options['wpe_error_loc'] ) && ! empty( $options['wpe_error_loc'] )) {
+  if ( is_set_all_fields()) {
 
 // AWS API keys
 $aws_access_key_id = $options['aws_access_id'];
@@ -120,22 +155,12 @@ if($http_code != 200)
  }
 }
 
-
-
-
-
 // copy access log files to desinated aws bucket
 function swl_copy_error_log() {
 
   $options = get_option( 'swl_options', swl_options_default() );
 
-  if ( isset( $options['aws_reigon'] ) && ! empty( $options['aws_reigon'] )
-  && isset( $options['aws_endpoint'] ) && ! empty( $options['aws_endpoint'] )
-&& isset( $options['aws_access_id'] ) && ! empty( $options['aws_access_id'] )
-&& isset( $options['aws_access_key'] ) && ! empty( $options['aws_access_key'] )
-&& isset( $options['aws_bucket_name'] ) && ! empty( $options['aws_bucket_name'] )
-&& isset( $options['wpe_access_loc'] ) && ! empty( $options['wpe_access_loc'] )
-&& isset( $options['wpe_error_loc'] ) && ! empty( $options['wpe_error_loc'] )) {
+  if ( is_set_all_fields()) {
 
 // AWS API keys
 $aws_access_key_id = $options['aws_access_id'];
@@ -239,35 +264,14 @@ curl_setopt($ch, CURLOPT_POSTFIELDS, $content);
 curl_exec($ch);
 $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 if($http_code != 200)
-	exit('Error : Failed to upload');
+$error_log_error = new WP_Erorr('Error', 'Error log could not be uploaded', 'Data??');
+print_r($error_log_error);
  }
 }
 
-register_activation_hook(__FILE__, 'set_up_cron');
-
-function set_up_cron() {
-  if ( ! wp_next_scheduled( ‘wp_loaded’ ) ) {
-    wp_schedule_event( time(), 'hourly', 'wp_loaded' );
-  }
-}
-
-add_action('wp_loaded','copy_log');
-
-// copy both access log and error log
+// copy both access log and error log, and send notification email to the admin
 function copy_log() {
-  return wp_mail("jerrychen017@gmail.com", "Notification TEST", "TEST", null);
   swl_copy_access_log();
   swl_copy_error_log();
+  return wp_mail("jerrychen017@gmail.com", "Notification Sent hourly", "TEST", null);
 }
-
-
-register_deactivation_hook(__FILE__, 'my_deactivation');
-
-function my_deactivation() {
-	wp_clear_scheduled_hook('wp_loaded');
-}
-
-
-// if ( ! wp_next_scheduled( ‘swl_copy_log’ ) ) {
-//             wp_schedule_event( time(), ‘daily’, ‘swl_copy_log’ );
-//     }
