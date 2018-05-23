@@ -150,8 +150,10 @@ curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
 curl_setopt($ch, CURLOPT_POSTFIELDS, $content);
 curl_exec($ch);
 $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-if($http_code != 200)
-	exit('Error : Failed to upload');
+if($http_code != 200) {
+  $access_log_error = new WP_Erorr('Error', 'Access log could not be uploaded', 'Data??');
+  print_r($access_log_error);
+}
  }
 }
 
@@ -263,9 +265,10 @@ curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
 curl_setopt($ch, CURLOPT_POSTFIELDS, $content);
 curl_exec($ch);
 $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-if($http_code != 200)
-$error_log_error = new WP_Erorr('Error', 'Error log could not be uploaded', 'Data??');
-print_r($error_log_error);
+if($http_code != 200) {
+  $error_log_error = new WP_Erorr('Error', 'Error log could not be uploaded', 'Data??');
+  print_r($error_log_error);
+}
  }
 }
 
