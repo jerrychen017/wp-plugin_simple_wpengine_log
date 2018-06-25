@@ -1,14 +1,16 @@
 === Simple Copy Log ===
-Plugin Name: Simple Copy Log
-Description: A plugin that copies over access and error log files to a designated AWS bucket on a weekly basis.
+Contributors: jerrychen017
+Tags: wpengine, log, aws
 Author:      Guangrui Chen - Jerry
 Version:     1.0
 License:     GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 
-Here is a short description of the plugin.  This should be no more than 150 characters.  No markup here.
+Simple WPEngine Log (SWL) is a plugin that copies WPEngine access and error log files to your designated AWS S3 bucket on a hourly, daily, or twice daily basis.
 
 == Description ==
+
+
 
 This is the long description.  No limit, and you can use Markdown (as well as in the following sections).
 
