@@ -29,17 +29,16 @@ function swl_callback_field_text( $args ) {
 // select field options
 function swl_options_select() {
 	return array(
-		'default'   => esc_html__('Default',   'swl'),
-		'hourly'     => esc_html__('Hourly',     'swl'),
-		'twicedaily'      => esc_html__('Twice Daily',      'swl'),
-		'daily'    => esc_html__('Daily',    'swl'),
+		'hourly'     => esc_html__('Hourly',     'simple_wpengine_log'),
+		'twicedaily'      => esc_html__('Twice Daily',      'simple_wpengine_log'),
+		'daily'    => esc_html__('Daily',    'simple_wpengine_log'),
 
 	);
 
 }
 
 // callback: select field
-function myplugin_callback_field_select( $args ) {
+function swl_callback_field_select( $args ) {
 
 	$options = get_option( 'swl_options', swl_options_default() );
 
@@ -57,7 +56,7 @@ function myplugin_callback_field_select( $args ) {
 		$selected = selected( $selected_option === $value, true, false );
 
 		echo '<option value="'. $value .'"'. $selected .'>'. $option .'</option>';
-		
+
 	}
 
 	echo '</select> <label for="swl_options_'. $id .'">'. $label .'</label>';

@@ -61,8 +61,8 @@ function swl_options_default() {
 
 		// email that will be sent notifications to
 		'swl_email' => get_option('admin_email'),
-		// display scheduling status
-		'swl_status' => 'No schedule yet',
+		// frequency
+		'swl_frequency' => 'daily',
 
 	);
 

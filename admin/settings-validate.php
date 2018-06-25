@@ -53,6 +53,27 @@ function swl_callback_validate_options( $input ) {
 		$input['wpe_error_loc'] = sanitize_text_field( $input['wpe_error_loc'] );
 	}
 
+	// Email
+	if ( isset( $input['swl_email'] ) ) {
+
+		$input['swl_email'] = sanitize_text_field( $input['swl_email'] );
+	}
+
+	// frequency
+$select_options = swl_options_select();
+
+if ( ! isset( $input['swl_frequency'] ) ) {
+
+	$input['swl_frequency'] = null;
+
+}
+
+if ( ! array_key_exists( $input['swl_frequency'], $select_options ) ) {
+
+	$input['swl_frequency'] = null;
+
+}
+
 	return $input;
 
 }

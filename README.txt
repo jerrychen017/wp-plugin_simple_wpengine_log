@@ -1,7 +1,6 @@
 === Simple Copy Log ===
 Plugin Name: Simple Copy Log
 Description: A plugin that copies over access and error log files to a designated AWS bucket on a weekly basis.
-Plugin URI:  https://plugin-planet.com/
 Author:      Guangrui Chen - Jerry
 Version:     1.0
 License:     GPLv2 or later
@@ -35,6 +34,19 @@ that lacks those changes -- as long as the trunk's `readme.txt` points to the co
 
     If no stable tag is provided, it is assumed that trunk is stable, but you should specify "trunk" if that's where
 you put the stable version, in order to eliminate any doubt.
+
+
+A valid SWL setup contains the following fields:
+* AWS Reigion
+
+
+
+
+
+Time is in Coordinated Universal TIme (UTC)
+
+
+
 
 == Installation ==
 

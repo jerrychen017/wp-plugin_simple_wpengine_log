@@ -28,6 +28,21 @@ function swl_display_settings_page() {
 			?>
 
 		</form>
+
+		<form action="core-functions.php" method="copy_log">
+
+			<?php
+			// execute button
+			submit_button('Execute', 'primary', 'execute');
+
+			// schedule button
+			submit_button('Schedule', 'primary', 'schedule');
+
+			// unschedule button
+			submit_button('Unschedule', 'primary', 'unschedule');
+			
+			?>
+		</form>
 	</div>
 
 	<?php
