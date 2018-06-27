@@ -23,47 +23,47 @@ You should have received a copy of the GNU General Public License
 with this program. If not, visit: https://www.gnu.org/licenses/
 */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
 // if admin area
-if ( is_admin() ) {
+if (is_admin()) {
 
-	// include dependencies
-	require_once plugin_dir_path( __FILE__ ) . 'admin/admin-menu.php';
-	require_once plugin_dir_path( __FILE__ ) . 'admin/settings-page.php';
-  require_once plugin_dir_path( __FILE__ ) . 'admin/settings-register.php';
-  require_once plugin_dir_path( __FILE__ ) . 'admin/settings-callbacks.php';
-  require_once plugin_dir_path( __FILE__ ) . 'admin/settings-validate.php';
+    // include dependencies
+    require_once plugin_dir_path(__FILE__) . 'admin/admin-menu.php';
+    require_once plugin_dir_path(__FILE__) . 'admin/settings-page.php';
+    require_once plugin_dir_path(__FILE__) . 'admin/settings-register.php';
+    require_once plugin_dir_path(__FILE__) . 'admin/settings-callbacks.php';
+    require_once plugin_dir_path(__FILE__) . 'admin/settings-validate.php';
 
 }
 
 // include dependencies: admin and public
-require_once plugin_dir_path( __FILE__ ) . 'includes/core-functions.php';
+require_once plugin_dir_path(__FILE__) . 'includes/core-functions.php';
 
 // default plugin options
-function swl_options_default() {
+function swl_options_default()
+{
 
-	return array(
-		// aws reigon
-		'aws_reigon'     => 'us-east-1',
-		// correspoinding aws endpoint. Please visit https://docs.aws.amazon.com/general/latest/gr/rande.html for reference.
-		'aws_endpoint'     => 's3.amazonaws.com',
-		// aws secrete access key id
-		'aws_access_id'   => '',
-		// aws secrete access key
-		'aws_access_key'   => '',
-		// name of your designated aws bucket
-    'aws_bucket_name'  => '',
-		// location of WPEngine current access log
-		'wpe_access_loc' => '',
-		// location of WPEngine current error log
-		'wpe_error_loc' => '',
+    return array(
+        // aws region
+        'aws_region' => 'us-east-1',
+        // correspoinding aws endpoint. Please visit https://docs.aws.amazon.com/general/latest/gr/rande.html for reference.
+        'aws_endpoint' => 's3.amazonaws.com',
+        // aws secrete access key id
+        'aws_access_id' => '',
+        // aws secrete access key
+        'aws_access_key' => '',
+        // name of your designated aws bucket
+        'aws_bucket_name' => '',
+        // location of WPEngine current access log
+        'wpe_access_loc' => '',
+        // location of WPEngine current error log
+        'wpe_error_loc' => '',
+        // the email that will be sent notifications to
+        'swl_email' => '',
+        // frequency that the plugin copies files
+        'swl_frequency' => 'daily',
 
-		// email that will be sent notifications to
-		'swl_email' => get_option('admin_email'),
-		// frequency
-		'swl_frequency' => 'daily',
-
-	);
+    );
 
 }
