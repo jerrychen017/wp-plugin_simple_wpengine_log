@@ -5,9 +5,10 @@ if (!defined('ABSPATH')) exit; // Exit if accessed directly
 // determines if all option fields have been setup
 function is_set_all_fields()
 {
-    // reigon is set and not empty
-    return isset($options['aws_reigon'])
-        && !empty($options['aws_reigon'])
+    $options = get_option('swl_options', swl_options_default());
+    // region is set and not empty
+    return isset($options['aws_region'])
+        && !empty($options['aws_region'])
         // aws endpoint is set and not empty
         && isset($options['aws_endpoint'])
         && !empty($options['aws_endpoint'])
@@ -25,14 +26,18 @@ function is_set_all_fields()
         && !empty($options['wpe_access_loc'])
         // wpe error log location is set and not empty
         && isset($options['wpe_error_loc'])
-        && !empty($options['wpe_error_loc']);
+        && !empty($options['wpe_error_loc'])
+        // notification email address is set and not empty
+        && isset($options['swl_email'])
+        && !empty($options['swl_email']);
 }
 
-// !!! debug this piece of code
-//if (!is_set_all_fields()) return;
+if (!is_set_all_fields()) return;
 
 // schedule a cron job swl_copy_cron is it was not scheduled
 if (!wp_next_scheduled('swl_copy_cron')) {
+    $options = get_option('swl_options', swl_options_default());
+
     wp_schedule_event(time(), $options['swl_frequency'], 'swl_copy_cron');
     // pause for 60 seconds to avoid unexpected scheduling
     sleep(60);
@@ -61,7 +66,7 @@ function swl_copy_access_log()
         // Bucket
         $bucket_name = $options['aws_bucket_name'];
         // AWS region
-        $aws_region = $options['aws_reigon'];
+        $aws_region = $options['aws_region'];
         // AWS host name
         $host_name = $bucket_name . '.' . $options['aws_endpoint'];
         // Server path to file
@@ -73,13 +78,12 @@ function swl_copy_access_log()
         $content_type = 'text/plain';
         // Service name for S3
         $aws_service_name = 's3';
-        // EST time zone (GMT -4:00)
-        $timezone  = -4;
-        // EST timestamp and date
-        $timestamp = gmdate('Ymd\THis\Z', time() + 3600*($timezone+date("I")));
-        $date = gmdate('Ymd', time() + 3600*($timezone+date("I")));
+        // UTC timestamp and date
+        $timestamp = gmdate('Ymd\THis\Z');
+        $date = gmdate('Ymd');
+        $date_title = gmdate('Ymdhia');
         // Name of the content on S3
-        $content_title = $date . '-access-log.log';
+        $content_title = $date_title . '-access-log.log';
         // HTTP request headers as key & value
         $request_headers = array();
         $request_headers['Content-Type'] = $content_type;
@@ -158,8 +162,7 @@ function swl_copy_access_log()
         curl_exec($ch);
         $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         if ($http_code != 200) {
-            $access_log_error = new WP_Erorr('Error', 'Access log could not be uploaded', 'Data??');
-            print_r($access_log_error);
+            wp_mail($options['swl_email'], "Notification from Simple WPEngine Log - WordPress", "An error occurred when uploading the access log to AWS.", null);
         }
     }
 }
@@ -178,7 +181,7 @@ function swl_copy_error_log()
         // Bucket
         $bucket_name = $options['aws_bucket_name'];
         // AWS region
-        $aws_region = $options['aws_reigon'];
+        $aws_region = $options['aws_region'];
         // AWS host name
         //$host_name = $bucket_name . '.s3.amazonaws.com';
         $host_name = $bucket_name . '.' . $options['aws_endpoint'];
@@ -191,13 +194,12 @@ function swl_copy_error_log()
         $content_type = 'text/plain';
         // Service name for S3
         $aws_service_name = 's3';
-        // EST time zone (GMT -4:00)
-        $timezone  = -4;
-        // EST timestamp and date
-        $timestamp = gmdate('Ymd\THis\Z', time() + 3600*($timezone+date("I")));
-        $date = gmdate('Ymd', time() + 3600*($timezone+date("I")));
+        // UTC timestamp and date
+        $timestamp = gmdate('Ymd\THis\Z');
+        $date = gmdate('Ymd');
+        $date_title = gmdate('Ymdhia');
         // Name of the content on S3
-        $content_title = $date . '-error-log.log';
+        $content_title = $date_title . '-error-log.log';
         // HTTP request headers as key & value
         $request_headers = array();
         $request_headers['Content-Type'] = $content_type;
@@ -276,8 +278,7 @@ function swl_copy_error_log()
         curl_exec($ch);
         $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         if ($http_code != 200) {
-            $error_log_error = new WP_Erorr('Error', 'Error log could not be uploaded', 'Data??');
-            print_r($error_log_error);
+            wp_mail($options['swl_email'], "Notification from Simple WPEngine Log - WordPress", "An error occurred when uploading the error log to AWS.", null);
         }
     }
 }
@@ -285,7 +286,9 @@ function swl_copy_error_log()
 // copy both access log and error log, and send notification email to the admin
 function copy_log()
 {
+    $options = get_option('swl_options', swl_options_default());
     swl_copy_access_log();
     swl_copy_error_log();
-    return wp_mail($options['swl_email'], "Congratulations! Your log files have been successfully uploaded!", "Notification from Simple WPEngine Log - WordPress", null);
+
+    return wp_mail($options['swl_email'], "Notification from Simple WPEngine Log - WordPress", "Congratulations! Your log files have been successfully uploaded!", null);
 }

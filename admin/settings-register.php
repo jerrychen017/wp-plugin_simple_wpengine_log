@@ -24,14 +24,14 @@ function swl_register_settings()
         'simple_wpengine_log'
     );
 
-// aws reigon
+// aws region
     add_settings_field(
-        'aws_reigon',
-        'Reigon',
+        'aws_region',
+        'Region',
         'swl_callback_field_text',
         'simple_wpengine_log',
         'swl_section_bucket',
-        ['id' => 'aws_reigon', 'label' => 'Your AWS Reigon']
+        ['id' => 'aws_region', 'label' => 'Your AWS Region']
     );
 
 // aws endpoint

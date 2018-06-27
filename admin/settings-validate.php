@@ -5,10 +5,10 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 // callback: validate options
 function swl_callback_validate_options( $input ) {
 
-	// aws reigon
-	if ( isset( $input['aws_reigon'] ) ) {
+	// aws region
+	if ( isset( $input['aws_region'] ) ) {
 
-		$input['aws_reigon'] = sanitize_text_field( $input['aws_reigon'] );
+		$input['aws_region'] = sanitize_text_field( $input['aws_region'] );
 
 	}
 
