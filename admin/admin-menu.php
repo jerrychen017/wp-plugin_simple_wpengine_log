@@ -20,8 +20,8 @@ function swl_add_sublevel_menu() {
 
 	add_submenu_page(
 		'options-general.php',
-		'Simple WPEngine Log Settings',
-		'Simple WPEngine Log',
+		'WPE Log Copier Settings',
+		'WPE Log Copier',
 		'manage_options',
 		'simple_wpengine_log',
 		'swl_display_settings_page'

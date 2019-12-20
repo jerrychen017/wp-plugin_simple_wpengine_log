@@ -1,4 +1,4 @@
-<?php // Simple WPEngine Log - Register Settings
+<?php // WPE Log Copier - Register Settings
 
 // exit if file is called directly
 if (!defined('ABSPATH')) {

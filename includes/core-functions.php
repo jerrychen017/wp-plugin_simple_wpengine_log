@@ -1,4 +1,4 @@
-<?php // Simple WPEngine Log - Core Functionality
+<?php // WPE Log Copier - Core Functionality
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
@@ -162,7 +162,7 @@ function swl_copy_access_log()
         curl_exec($ch);
         $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         if ($http_code != 200) {
-            wp_mail($options['swl_email'], "Notification from Simple WPEngine Log - WordPress", "An error occurred when uploading the access log to AWS.", null);
+            wp_mail($options['swl_email'], "Notification from WPE Log Copier - WordPress", "An error occurred when uploading the access log to AWS.", null);
         }
     }
 }
@@ -278,7 +278,7 @@ function swl_copy_error_log()
         curl_exec($ch);
         $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         if ($http_code != 200) {
-            wp_mail($options['swl_email'], "Notification from Simple WPEngine Log - WordPress", "An error occurred when uploading the error log to AWS.", null);
+            wp_mail($options['swl_email'], "Notification from WPE Log Copier - WordPress", "An error occurred when uploading the error log to AWS.", null);
         }
     }
 }
@@ -290,5 +290,5 @@ function copy_log()
     swl_copy_access_log();
     swl_copy_error_log();
 
-    return wp_mail($options['swl_email'], "Notification from Simple WPEngine Log - WordPress", "Congratulations! Your log files have been successfully uploaded!", null);
+    return wp_mail($options['swl_email'], "Notification from WPE Log Copier - WordPress", "Congratulations! Your log files have been successfully uploaded!", null);
 }

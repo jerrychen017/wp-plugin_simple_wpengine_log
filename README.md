@@ -21,7 +21,7 @@ basis. Time in the plugin is in Coordinated Universal TIme (UTC)
 2. Go to `Plugin` in your WordPress admin page and click on `Add new` 
 3. Click on `Upload Plugin` and upload `wpe-log-copier.zip`
 4. Activate the plugin through the 'Plugins' menu in WordPress
-5. You can find the plugin `Simple WPEngine Log` under `Settings`
+5. You can find the plugin `WPE Log Copier` under `Settings`
 
 == Frequently Asked Questions ==
 

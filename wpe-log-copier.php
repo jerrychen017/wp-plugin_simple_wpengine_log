@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: Simple WPEngine Log
+Plugin Name: WPE Log Copier
 Description: A plugin that copies over access and error log files to a designated AWS bucket on a weekly basis.
 Plugin URI:  https://plugin-planet.com/
-Author:      Guangrui Chen - Jerry
+Author:      Jerry Chen
 Author URI:  http://guangruichen.com
 Version:     1.0
 License:     GPLv3

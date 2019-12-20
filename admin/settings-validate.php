@@ -1,4 +1,4 @@
-<?php // Simple WPEngine Log - Validate Settings
+<?php // WPE Log Copier - Validate Settings
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 

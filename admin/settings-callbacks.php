@@ -1,4 +1,4 @@
-<?php // Simple WPEngine Log - Settings Callbacks
+<?php // WPE Log Copier - Settings Callbacks
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
